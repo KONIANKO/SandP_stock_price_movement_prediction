@@ -1,89 +1,103 @@
-Андрей,
-отправляют Вам данные по тестовому заданию.
 
-Задача: Повторить исследование, описанное в работе Forecasting the Stock Market using News Sentiment Analysis (прилагается), и предоставить результаты двух прогнозов (по каждому, accuracy и confusion matrix), полученные с использовании:
+# Instructions to run the code in jupyter notebook
+
+0. go to project folder in a cmd tool
+1. virtualenv venv (create virtual environment)
+2. .\venv\Scripts\activate (activate virtual environment)
+3. python -m ipykernel install --name=venv (return: Installed kernelspec venv in C:\ProgramData\jupyter\kernels\venv) (link jupyter notebook to your virtual environment)
+4. pip install -r requirements.txt
+5. jupter notebook (start jupyter notebook)
+
+
+# Task
+
+Reproduce the study described in Forecasting the Stock Market using News Sentiment Analysis (attached) and provide the results of two forecasts (for each, accuracy and confusion matrix) obtained using:
+
+1. SVM, TextBlob.
+2. SVM, TextBlob+TA.
+ 
+Evaluate this work in the form of a short essay ( advantages, disadvantages, mistakes, recommendations).
+
+# Задача
+
+Повторить исследование, описанное в работе Forecasting the Stock Market using News Sentiment Analysis (прилагается), и предоставить результаты двух прогнозов (по каждому, accuracy и confusion matrix), полученные с использовании:
+
 1.    SVM, TextBlob.
 2.    SVM, TextBlob+TA.
  
 Дать оценку данной работе в виде короткого эссе (достоинства, недостатки, ошибки, рекомендации).
- 
-Материалы:
+
+
+# Sources (источники)
+
 1. Forecasting the Stock Market using News Sentiment Analysis. Прилагается.
 2. Dataset YahooFinancials package. Прилагается.
 3. Dataset “all-the-news-2-1”. Скачать здесь - https://components.one/datasets/all-the-news-2-news-articles-dataset/.
  
-Срок выполнения 5 дней - к 28 июля 12:00.
-Вознаграждение 15,000 р. вне зависимости от того, сможете ли Вы достигнуть показатели, описанные в работе. Мы ценим время людей, с которыми работаем.
- 
-С уважением
-Ольга Летунова
-+7 (981) 8480579
-ООО Рестадвайзер
-Телефон, Telegram, WhatsApp
---------------------------
-http://smartventures.pro
 
+# Assessment of the paper (Оценку данной работы)
 
+### 1. Advantages
 
-* Why only SVM?
-* How the data and the stocks were chosen?    daily S&P 500 index movements
-* How representitive are they?
-* Is this prediction for the whole market or for individual stocks?
-* Analysis on the basis of news is not allways a good idea, especially, if the news concern insider information - insider trading
-	* often, if a news came out, its too late to "jump on the trend"
-* The researcher has chosen to filter out the article text because his computer was not able to execute any of the sentiment analysis methods on the whole article text. Therefore, the title of the article will be considered to represent the news article sentiment.
+* the author did propper data preprocessing, even if his explanatons have been incomplete or unclear at some points, which complicated the ecact reproduction of his research
+* the author experimented with a variaty of methods, not only one
+
+### 1. Преимущества
+
+* автор провел тщательную предварительную обработку данных, несмотря на то, что в некоторых моментах его объяснения были неполными или неясными, что затрудняло точное воспроизведение его исследования
+* автор экспериментировал с различными методами, а не только с одним.
+
+### 2. Disadvantages
+
+* The researcher has chosen to filter out the article text because his computer was not able to execute any of the sentiment analysis methods on the whole article text. Therefore, the title of the article will be considered to represent the news article sentiment. -> the sentiment analysis could be more precise on the whole news text
+* How the data and the stocks were chosen?    
+* predicting the daily S&P 500 index movements is nice to trade or invest in S&P 500 based ETF's, but it would be nice to implement a prediction for single companies in the future.
 * Since the prediction of a stock for the following day is considered as a short-term prediction, the period should is set on 10 days
-	* to long term/middle term/short term and the ensemble learning (majority vote)
-* if some days are skipped (are they), do we take the previous existing 10 days or e.g. the last 8 days, if 2 days from the last 10 were skipped?
+	* the autor did not try othe periods of time long term/middle term/short term
+	* majority vote would be possible not only on different models, but also on different time periods
+
+### 2. Недостатки
+
+* Исследователь решил отфильтровать текст статьи, поскольку его компьютер не смог выполнить ни один из методов анализа настроений на всем тексте статьи. Поэтому заголовок статьи рассматривается как отражение настроения новостной статьи. -> анализ настроения может быть более точным на всем тексте новости
+* Как были выбраны данные и акции?    
+* Прогнозирование ежедневного движения индекса S&P 500 удобно для торговли или инвестиций в ETF, основанные на S&P 500, но было бы неплохо реализовать прогнозирование для отдельных компаний в будущем.
+* Поскольку прогноз акций на следующий день считается краткосрочным прогнозом, период должен быть установлен на 10 дней.
+	* автор не пробовал другие периоды времени долгосрочный/среднесрочный/краткосрочный
+* голосование большинством голосов (majority vote) было бы возможно не только на разных моделях, но и на разных периодах времени
+
+### 3. Mistakes
+
+* An analysis on the basis of news is not allways a good idea, especially, if the news concern insider information of a company because of insider trading.
+* Often, if a news came out, its too late to "jump on the trend", you have to make your move beforehand
+* In general, the author missed to motivate his decisions at some points. Sometimes he provided some citations, but on other parts it was like guessing
+
+### 3. Ошибки
+
+* Анализ на основе новостей не всегда является хорошей идеей, особенно, если новости касаются инсайдерской информации компании из-за инсайдерской торговли.
+* Часто, если новость вышла, уже слишком поздно " вскочить на тренд", нужно делать свой ход заранее.
+* В целом, в некоторых моментах автор не мотивировал свои решения. Иногда он приводил некоторые цитаты, но в других случаях это было похоже на гадание.
+
+
+### 4. Recommendations
+* try more methods for classification
+* try to use ensemble learning/majority vote, where you get scores from several models. Afterwards, you can pic the prediction, which was generated by most of the models.
+* try to use more data
+* try to calculate more parameters for TA
+* it would be interesting to consider not only the sentiment of the news, but also other NLP parameters
+	* a first idea is to look for important key words, which occured in news in the considered time period before a pump or dump on the market
+	* e.g. a continuous mention of "war" could dump the stock prices, while the n-gram "growing consumption" could lead to some kind of pump on the curve
+
+### 4. Рекомендации
+* попробовать больше методов для классификации
+* попробовать использовать ensemble learning/majority vote, когда вы получаете результат от нескольких моделей. После этого вы можете выбрать предсказание, которое было сгенерировано большинством моделей.
+* попытаться использовать больше данных
+* попытаться вычислить больше параметров для TA
+* было бы интересно учитывать не только сентимент новостей, но и другие параметры NLP
+	* первая идея - искать важные ключевые слова, которые встречались в новостях в рассматриваемый период времени до того, как на рынке произошёл памп или дамп.
+	* например, постоянное упоминание слова "война" может обрушить цены на акции, в то время как n-gramm "растущее потребление" может привести к росту графика
 
 
 
-News articles preprocessing (all-the-news-2-1.csv):
-* keep date, title, section, and publication. 
-* skip article text
-* all the rows without a title are filtered to assure that each entry has a filled title column
-* Some publishers do not have a filled section column; these entries are replaced with “unknown”. However, this study is mainly focused on financial and business news articles and with an “unknown” section column it is impossible to decide whether it belongs to a financial and business article or not. Therefore, this study uses two news article datasets, (1) with all the news articles with a financial or business-related section, and (2) all the news articles with unknown sections combined with dataset 1.
 
-News Articles Sentiment Scores
-* After preprocessing the news article dataset, some code should be executed to gather the different sentiment score features. As mentioned in Section 3.2 the following sentiment scores are calculated and added to the two news articles datasets: VADER, TextBlob, and LM. Hence, each row (news article) has several sentiment score columns. Since the news article and price datasets will be merged on the date columns, a group by date function has been executed. While grouping the rows by the date column, the sentiment scores will be averaged.
-
-
-S&P 500 preprocessing (YahooFinancials package.xls) (1785 entries before preprocessing, includig keys row)
-* keep columns: close price, volume, and date
-* Another column has been added with the movement, this is de binary dependent variable in this study. A 1 is assigned if the stock market value went up or remained the same compared to the day before and 0 if the stock market values went down.
-* Since it has been decided to use fundamental as well as technical analysis, a column has been added with a technical indicator. Although there are many technical indicators which can be calculated with the features in the S&P 500 dataset, the most common one has been chosen, which is the simple moving average (SMA). To calculate the SMA, all the closing prices are summed up over a given period and divided by the number of periods
-SMA = (A1 + A2 + ... + An) / n
-* Since the prediction of a stock for the following day is considered as a short-term prediction, the period should is set on 10 days
-
-
-Merge Datasets:
-* After the datasets are preprocessed, the price dataset has been left joined to the news article datasets to create two datasets that will be used as input and output for the machine and deep learning models. 
-* The datasets are merged on the column date. Thus, the two dataset which will be used for this research are fully preprocessed and both contains 1,096 rows. Because both datasets consist of the same features only one table has been created to give an overview of all the features in the datasets.
-* The dependent variables have 589 entries that the stock market movement directionality went down, and 480 entries where the stock market price went up or remained the same.
-* One small adjustment has been made to the final datasets, which is known as standardization. This method may help to minimize dataset dissimilarities. Rescaling the features to give them the characteristics of a regular normal distribution is known as standardization (or Z-score normalization) (formula on page 20)
-
-
-Training, Validation, and Test Set
-* dataset for this study has been divided into two parts, 80% for training and 20% for testing the models. 
-* Hence, the training data contains 855 observations, and the test data consists of 214 observations.
-* Real-world datasets should use a stratified 10-fold cross-validation (Kohavi, 1995). The cross-validation method ensures that the training and test sets include the same proportions of both target groups, which are in this study the upwards and downwards movement of the S&P 500 index price. Cross-validation guarantees the model's validity and reliability; see Section 4.3 for a more comprehensive explanation. The validation set was used as part of a grid search, covered in more detail in Subsection 4.2.3.
-* Each of these algorithms was used to create models, and a grid search was applied to find the best model settings, as described in the following subsection. Subsequently, the models were evaluated, and the best performing model for predicting daily S&P 500 movements was selected.
-* automated hyperparameter optimization (HPO) has been used in this study. Grid search, also known as full factorial design, is a commonly used HPO tool which automatically finds the best hyperparameters for an algorithm
-
-
-
-
-
-
-Doku:
-https://janakiev.com/blog/jupyter-virtual-envs/
-
-
-go to folder
-virtualenv venv
-.\venv\Scripts\activate
-pip install notebook
-python -m ipykernel install --name=venv (return: Installed kernelspec venv in C:\ProgramData\jupyter\kernels\venv)
-jupter notebook
 
 
