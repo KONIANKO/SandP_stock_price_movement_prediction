@@ -1,5 +1,5 @@
 
-# S&P 500 stock price predictor with an accuracy of 0.667 (66.7%)
+# S&P 500 stock price movement direction predictor with an accuracy of 0.667 (66.7%)
 
 
 # Instructions to run the code in jupyter notebook
