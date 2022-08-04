@@ -9,52 +9,72 @@
 5. jupter notebook (start jupyter notebook)
 
 
-# Task
-
-Reproduce the study described in Forecasting the Stock Market using News Sentiment Analysis (attached) and provide the results of two forecasts (for each, accuracy and confusion matrix) obtained using:
-
-1. SVM, TextBlob.
-2. SVM, TextBlob+TA.
- 
-Evaluate this work in the form of a short essay ( advantages, disadvantages, mistakes, recommendations).
-
 # Задача
 
-Повторить исследование, описанное в работе Forecasting the Stock Market using News Sentiment Analysis (прилагается), и предоставить результаты двух прогнозов (по каждому, accuracy и confusion matrix), полученные с использовании:
+1. Подтвердить или опровергнуть результаты исследования, описанные в работе Forecasting the Stock Market using News Sentiment Analysis , по двум прогнозам, полученным с использованием:
 
-1.    SVM, TextBlob.
-2.    SVM, TextBlob+TA.
- 
-Дать оценку данной работе в виде короткого эссе (достоинства, недостатки, ошибки, рекомендации).
+	1. SVM, TextBlob. 
+	2. SVM, TextBlob+TA. По каждому отобразить accuracy и confusion matrix. 
+	
+2. Предоставить Ваше экспертное мнение об исходном исследовании, его предмете и результатах. 
 
 
-# Sources (источники)
+# Требования: 
+
+1. Представить в github в виде полностью рабочего кода jupyter notebook с комментариями кода, его результатов, и, в случае отличия от исходного исследования, предполагаемых причин отличия (например, выбрали записи по параметру X, у нас получилось ...., а работе .... расхождение возможно по причине...) 
+
+2. Презентовать полученные данные на онлайн сессии (время и дата согласовывается после сдачи).
+
+
+# Источники
 
 1. Forecasting the Stock Market using News Sentiment Analysis. Прилагается.
 2. Dataset YahooFinancials package. Прилагается.
 3. Dataset “all-the-news-2-1”. Скачать здесь - https://components.one/datasets/all-the-news-2-news-articles-dataset/.
- 
 
-# Assessment of the paper (Оценку данной работы)
 
-### 1. Advantages
+# Мнение об исходном исследовании, его предмете и результатах. 
 
-* the author did propper data preprocessing, even if his explanatons have been incomplete or unclear at some points, which complicated the ecact reproduction of his research
-* the author experimented with a variaty of methods, not only one
+* Центральныйм вопросом исследования было узнать, можно ли использовать сентимент новостей для предсказания движения рынка. Как и автор статьи, я могу подтвердить, что сентимент новостей можно использовать для предсказания рынка. Также, как и автор, я прищёл к выводу, что добавление к сентименту технических параметров приводит к дальнейшему улучшению результатов. Находит подтверждение следующее высказывание: "В настоящем исследовании представлены доказательства того, что фондовый рынок можно прогнозировать на основе новостных статей. Однако рекомендуется сочетать эти новостные статьи с техническим анализом."
+* Как и у автора, у меня лучше всего сработала комбинация SVM + TextBlob + TA, однако, с использованием других гиперпараметров, чем у автора.
+* В исследовании лучшим достигнутым показателем accuracy является 0.69 (а не 0.75, как утверждалось на прошлом собеседовании. Показатель с таким результатом был AUC-PR)
+* Мой лучший показатель accuracy составил 0.669. При этом я использовал SVM + TextBlob + TA и свои гиперпараметры для SVM, которые я выявил с использованием GridSearch на своих данных.
+* Отклонение от результатов автора связанно с тем, что по описанию предобработки дейтасетов мне не удалось точно воспроизвести дейтасет автора.
+* Как и автор, я использовал только те строки новостного дейтасета, в которых был прописан заголовок стати и в которых речь идёт о финансах или о бизнесе.
+* Я тоже добавил параметр TextBlob, вычислил SMA и объединил дейтасеты по дате. Также, я нормалтзовал все параметры с использование z-score.
+* также, был подсчитан параметр movement, на котором и происходит бинарная классификация. Этот параметр описыват, вырос, остался прежним или упал индекс S&P 500 по отношению к цене закрытия в предыдущий день
+* Автор утверждает, что изначально, до обработки, новостной дейтасет хранит в себе новости с 2013 года по начало 2020 года. Однако, анализ данных показал, что по факту дейтасет содержит новостные статьи с 01.01.2016 года по 02.04.2020 года.
+* Также, дейтафрейм содержит не 2.7 млн. строк, а 2.688.878 млн. строк.
+* Дейтасет с данными индекса S&P 500 содержит изначально данные на период времени между 31.12.2012 и 31.01.2020. Для своей работы я использовал только тот промежуток времени, в который эти два дейтасета пересекаются: 01.01.2016 - 31.01.2020.
+* Автор говорит на странице 20: "Зависимые переменные имеют 589 записей, в которых направление движения фондового рынка пошло вниз, и 480 записей, в которых цена фондового рынка пошла вверх или осталась прежней."
+* Таким образом, у него получается 589 + 480 = 1069 строк. Однако, на странице 19 автор говорит о 1096 записях. Здесь есть какая-то нестыковка или это опечатка.
+* Мне не удалось воспроизвести такое количество строк. Предварительная обработка данных и объединение двух наборов данных дает только 1027 строк (569 рост или прежний показатель и 458 падение), которые имеют заполненные значения по всем признакам. Возможно, автор забыл выбросить субботы и воскресенья в наборе данных новостей. Новости печатаются каждый день, в то время как фондовый рынок открыт только с понедельника по пятницу. Таким образом, для параметров S&P500 нет данных за выходные дни.
+* При объёдинении дейтасетов автоматически стераются те дни, за которые отсутствуют данные. Новостные данные существуют на все дни недели, с понедельника по воскресенье, в то время, как технические данные рынка S&P 500 существуют только для будних дней, понедельник по пятницу.
+* у моего подхода есть слабое место. Новости по субботам и воскресеньям не учитываются. Если автор использует сентимент из новостей за выходные дни, то он не описал, как он обрабатывает недостающие данные по open, close, value и т.д. за эти дни. Одним из подходов может быть заполнение этих значений для каждой субботы и воскресенья теми же данными, что и для предыдущей пятницы.
+* На данный момент я не буду следовать этому подходу. Таким образом, последние 10 дней для настроений и технических данных для понедельника будут ПН-ПТ из двух предыдущих недель.
+* В силу игнорирования выходных дней, мои итоговое дейтасеты начинаются с 04.01.2016
+* Общее количество строк в моём дейтасете 1027 (а у автора 1096 или 1069)
+* на фоне описанных расхождений есть предположение, что автор либо использовал другую версию изначального дейтасета, либо он не точно и не полно описал свои действия. Как мы видим, некоторые погрешности у него есть.
+* Т.к. мой дейтасет отличается от того дейтасета, который получил автор, я решил попробовать использовать гиперпараметры по умолчанию, гиперпараметры автора и гиперпараметры, полученные из своего поиска GridSearch на своих данных. Ипользование гиперпараметров автора или гиперпараметров по умолчанию привело к низким показателям accuracy.
+* поиск оптимальных гиперпараметров для моих дейтасетов выявил следующие оптимальные показатели:
+	* SVM + TextBlob: {'C': 1, 'gamma': 1, 'kernel': 'linear'} 
+	* SVM + TextBlob + TA: {'C': 100, 'gamma': 1, 'kernel': 'linear'}
+	* у автора было: {'C': 100, 'gamma': 0.001, 'kernel': 'rbf'}
+* Accuracy по всем моим экспериментам (округлённый):
+	* SVM + TextBlob with SVM with default hyperparameters: 0.587
+	* SVM + TextBlob with SVM with own optimal hyperparameters: 0.578
+	* SVM + TextBlob with hyperparameters from paper: 0.578
+	* SVM + TextBlob + TA with SVM with default hyperparameters: 0.539
+	* SVM + TextBlob + TA with SVM with own optimal hyperparameters: **0.667**
+	* SVM + TextBlob + TA with hyperparameters from paper: 0.592
+
+
 
 ### 1. Преимущества
 
 * автор провел тщательную предварительную обработку данных, несмотря на то, что в некоторых моментах его объяснения были неполными или неясными, что затрудняло точное воспроизведение его исследования
 * автор экспериментировал с различными методами, а не только с одним.
 
-### 2. Disadvantages
-
-* The researcher has chosen to filter out the article text because his computer was not able to execute any of the sentiment analysis methods on the whole article text. Therefore, the title of the article will be considered to represent the news article sentiment. -> the sentiment analysis could be more precise on the whole news text
-* How the data and the stocks were chosen?    
-* predicting the daily S&P 500 index movements is nice to trade or invest in S&P 500 based ETF's, but it would be nice to implement a prediction for single companies in the future.
-* Since the prediction of a stock for the following day is considered as a short-term prediction, the period should is set on 10 days
-	* the autor did not try othe periods of time long term/middle term/short term
-	* majority vote would be possible not only on different models, but also on different time periods
 
 ### 2. Недостатки
 
@@ -65,11 +85,6 @@ Evaluate this work in the form of a short essay ( advantages, disadvantages, mis
 	* автор не пробовал другие периоды времени долгосрочный/среднесрочный/краткосрочный
 * голосование большинством голосов (majority vote) было бы возможно не только на разных моделях, но и на разных периодах времени
 
-### 3. Mistakes
-
-* An analysis on the basis of news is not allways a good idea, especially, if the news concern insider information of a company because of insider trading.
-* Often, if a news came out, its too late to "jump on the trend", you have to make your move beforehand
-* In general, the author missed to motivate his decisions at some points. Sometimes he provided some citations, but on other parts it was like guessing
 
 ### 3. Ошибки
 
@@ -77,15 +92,6 @@ Evaluate this work in the form of a short essay ( advantages, disadvantages, mis
 * Часто, если новость вышла, уже слишком поздно " вскочить на тренд", нужно делать свой ход заранее.
 * В целом, в некоторых моментах автор не мотивировал свои решения. Иногда он приводил некоторые цитаты, но в других случаях это было похоже на гадание.
 
-
-### 4. Recommendations
-* try more methods for classification
-* try to use ensemble learning/majority vote, where you get scores from several models. Afterwards, you can pic the prediction, which was generated by most of the models.
-* try to use more data
-* try to calculate more parameters for TA
-* it would be interesting to consider not only the sentiment of the news, but also other NLP parameters
-	* a first idea is to look for important key words, which occured in news in the considered time period before a pump or dump on the market
-	* e.g. a continuous mention of "war" could dump the stock prices, while the n-gram "growing consumption" could lead to some kind of pump on the curve
 
 ### 4. Рекомендации
 * попробовать больше методов для классификации
