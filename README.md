@@ -1,4 +1,7 @@
 
+# S&P 500 stock price predictor with an accuracy of 0.667 (66.7%)
+
+
 # Instructions to run the code in jupyter notebook
 
 0. go to project folder in a cmd tool
